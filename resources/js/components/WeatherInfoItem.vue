@@ -1,7 +1,10 @@
 <template>
-    <div>
-        <p><strong>{{ location }}</strong></p>
-        <b-table :data="data" :columns="columns"></b-table>
+    <div class="tile is-ancestor">
+        <div class="tile is-parent notification is-vertical">
+            <div class="tile is-child">
+                <b-table :data="data" :columns="columns"></b-table>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -12,6 +15,10 @@
             return {
                 data: [this.weather],
                 columns: [
+                    {
+                        field: 'location',
+                        label: 'Location'
+                    },
                     {
                         field: 'clouds',
                         label: 'Clouds %'

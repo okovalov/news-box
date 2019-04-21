@@ -1,13 +1,21 @@
 <template>
-    <div>
-        <b-field>
-            <exchange-info-item v-if="isExchangeLoaded" :exchange="exchange" :pair="pair"></exchange-info-item>
-        </b-field>
-        <b-notification ref="element" :closable="false">
-            <button class="button is-primary is-medium" @click="fetchData">
-                Refresh
-            </button>
-        </b-notification>
+    <div class="container">
+        <div class="tile is-ancestor">
+            <div class="tile is-parent notification">
+                <div class="tile is-child  has-text-centered">
+                    <b-field>
+                        <exchange-info-item v-if="isExchangeLoaded" :exchange="exchange" :pair="pair"></exchange-info-item>
+                    </b-field>
+                </div>
+                <div class="tile is-child is-2 has-text-centered">
+                    <b-notification ref="element" :closable="false">
+                        <button class="button is-primary is-medium is-rounded" @click="fetchData">
+                            Refresh
+                        </button>
+                    </b-notification>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
