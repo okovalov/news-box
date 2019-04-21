@@ -7,12 +7,12 @@ use Presearch\Models\AccountTransaction;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
 
-class ExchangeHasBeenReceived
+class NewsTopicHasBeenReceived
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     /**
-     * Exchange that was created
+     * NewsTopic that was created
      *
      * @var array
      */

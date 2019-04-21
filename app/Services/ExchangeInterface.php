@@ -4,21 +4,21 @@ namespace App\Services;
 interface ExchangeInterface
 {
     /**
-     * Creates an instance of Wallet in the database
+     * Creates an instance of Exchange
      *
-     * @param array  $rateInfo
+     * @param array  $payload
      *
      * @return App\Models\Exchange
      */
-    public function preserveRate($rateInfo);
+    public function preserveData($payload);
 
     /**
-     * Retrieves the balance for the given wallet address and currencyCode
+     * Fetches the latest rate by given $from and $to
      *
      * @param string $from
      * @param string $to
      *
      * @return mixed|array
      */
-    public function getRate($from, $to);
+    public function getData($from, $to);
 }

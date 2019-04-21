@@ -31,28 +31,27 @@ class ExchangeService implements ExchangeInterface
     /**
      * @inheritDoc
      */
-    public function preserveRate($rateInfo)
+    public function preserveData($payload)
     {
         $responseMap = config('newsbox.exchange.response_map');
 
-        $payload = [
-            'from_currency_code' => $rateInfo[$responseMap['from_currency_code']],
-            'to_currency_code' => $rateInfo[$responseMap['to_currency_code']],
-            'rate' => $rateInfo[$responseMap['rate']],
-            'refreshed_at' => $rateInfo[$responseMap['refreshed_at']],
+        $data = [
+            'from_currency_code' => $payload[$responseMap['from_currency_code']],
+            'to_currency_code' => $payload[$responseMap['to_currency_code']],
+            'rate' => $payload[$responseMap['rate']],
+            'refreshed_at' => $payload[$responseMap['refreshed_at']],
         ];
 
-        $exchange = Exchange::create($payload);
+        $entity = Exchange::create($data);
 
-        return $exchange;
+        return $entity;
     }
 
     /**
      * @inheritDoc
      */
-    public function getRate($from, $to)
+    public function getData($from, $to)
     {
-        $apiKey = config('newsbox.exchange.api_key');
         $endpointAddress = config('newsbox.exchange.endpoint');
 
         try {
@@ -63,7 +62,7 @@ class ExchangeService implements ExchangeInterface
                     'function' => self::EXCHANGE_RATE_FUNCTION,
                     'from_currency' => strtolower($from),
                     'to_currency' => strtolower($to),
-                    'apikey' => $apiKey
+                    'apikey' => config('newsbox.exchange.api_key')
                 ]
             ]);
 

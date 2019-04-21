@@ -5,6 +5,7 @@ namespace App\Console;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 use App\Console\Commands\CheckForExchange;
+use App\Console\Commands\CheckForNewsTopic;
 
 class Kernel extends ConsoleKernel
 {
@@ -14,7 +15,8 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        CheckForExchange::class
+        CheckForExchange::class,
+        CheckForNewsTopic::class,
     ];
 
     /**
@@ -25,11 +27,14 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $cronSchedule = config('newsbox.exchange.cron');
-
         $schedule
             ->command('check:exchange usd cad')
-            ->cron($cronSchedule['exchange_schedule'])
+            ->cron(config('newsbox.exchange.cron.exchange_schedule'))
+            ->appendOutputTo('/tmp/laravel-cron');
+
+        $schedule
+            ->command('check:news water')
+            ->cron(config('newsbox.newstopic.cron.newstopic_schedule'))
             ->appendOutputTo('/tmp/laravel-cron');
     }
 

@@ -14,7 +14,7 @@ class NewsTopicsController extends Controller
      */
     public function index()
     {
-        $active = NewsTopic::get();
+        $active = NewsTopic::latest()->take(5)->get();
 
         return view('newsTopics.index', compact('active'));
     }

@@ -2,10 +2,10 @@
 namespace App\Listeners;
 
 use Illuminate\Contracts\Queue\ShouldQueue;
-use App\Events\ExchangeHasBeenReceived;
-use App\Services\ExchangeService;
+use App\Events\NewsTopicHasBeenReceived;
+use App\Services\NewsTopicService;
 
-class SaveLatestExchange implements ShouldQueue
+class SaveLatestNewsTopic implements ShouldQueue
 {
     /**
      * ExchangeService
@@ -14,7 +14,7 @@ class SaveLatestExchange implements ShouldQueue
      */
     protected $service;
 
-    public function __construct(ExchangeService $service)
+    public function __construct(NewsTopicService $service)
     {
         $this->service = $service;
     }
@@ -22,10 +22,10 @@ class SaveLatestExchange implements ShouldQueue
     /**
      * Handle the event.
      *
-     * @param  ExchangeHasBeenReceived $event
+     * @param  NewsTopicHasBeenReceived $event
      * @return void
      */
-    public function handle(ExchangeHasBeenReceived $event)
+    public function handle(NewsTopicHasBeenReceived $event)
     {
         $payload = $event->payload;
 

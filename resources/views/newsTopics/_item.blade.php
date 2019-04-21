@@ -17,5 +17,6 @@
         <p>
             {{ $newsTopic->content }}
         </p>
+        <p>{{ $newsTopic->published_at->toFormattedDateString() }}</p>
     </div>
 </div>

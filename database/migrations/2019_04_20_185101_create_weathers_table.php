@@ -17,8 +17,8 @@ class CreateWeathersTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedInteger('weather_id');
             $table->string('location', 100);
-            $table->string('type', 25);
-            $table->string('description', 100);
+            $table->string('type', 25)->nullable();
+            $table->string('description', 100)->nullable();
             $table->decimal('wind', 8, 4)->default(0);
             $table->unsignedInteger('clouds')->nullable();
             $table->timestamps();

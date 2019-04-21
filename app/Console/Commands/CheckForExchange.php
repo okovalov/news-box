@@ -60,7 +60,7 @@ class CheckForExchange extends Command
 
         $this->info('Fetching rate for "' . $from . '" -> "' . $to . '"');
 
-        $result = $this->exchangeService->getRate($from, $to);
+        $result = $this->exchangeService->getData($from, $to);
 
         if (!isset($result['Realtime Currency Exchange Rate'])) {
             $this->error('There was an error during command execution');
