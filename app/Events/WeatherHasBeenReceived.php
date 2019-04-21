@@ -6,12 +6,12 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
 
-class ExchangeHasBeenReceived
+class WeatherHasBeenReceived
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     /**
-     * Exchange that was created
+     * Weather that was created
      *
      * @var array
      */

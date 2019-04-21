@@ -5,7 +5,7 @@
 @section('content')
 
     <nav class="content-tabs">
-        @include('newsTopics._list', ['newsTopics' => $active])
+        @include('newsTopic._list', ['newsTopics' => $active])
     </nav>
 
 @endsection

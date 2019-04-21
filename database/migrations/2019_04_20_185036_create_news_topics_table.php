@@ -15,9 +15,10 @@ class CreateNewsTopicsTable extends Migration
     {
         Schema::create('news_topics', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('title', 255);
-            $table->string('author', 100)->nullable();
-            $table->string('description', 500)->nullable();
+            $table->string('title', 500);
+            $table->string('subject', 255);
+            $table->string('author', 255)->nullable();
+            $table->string('description', 1000)->nullable();
             $table->string('url', 255)->nullable();
             $table->string('url_to_image', 255)->nullable();
             $table->string('content', 1000)->nullable();

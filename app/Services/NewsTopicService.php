@@ -37,6 +37,7 @@ class NewsTopicService implements NewsTopicInterface
 
         $data = [
             'title' => $payload[$responseMap['title']],
+            'subject' => $payload['subject_to_save'],
             'author' => $payload[$responseMap['author']],
             'description' => $payload[$responseMap['description']],
             'url' => $payload[$responseMap['url']],
@@ -47,9 +48,12 @@ class NewsTopicService implements NewsTopicInterface
             ->toDateTimeString(),
         ];
 
-
         $entity = NewsTopic::updateOrCreate(
-            ['title' => $data['title'], 'author' => $data['author']],
+            [
+                'title' => $data['title'],
+                'author' => $data['author'],
+                'subject' => $data['subject']
+            ],
             $data
         );
 
@@ -80,6 +84,8 @@ class NewsTopicService implements NewsTopicInterface
 
             if (isset($result[self::TOP_LEVEL_NAME])) {
                 foreach ($result[self::TOP_LEVEL_NAME] as $item) {
+                    $item['subject_to_save'] = $query;
+
                     event(new NewsTopicHasBeenReceived($item));
                 }
             }

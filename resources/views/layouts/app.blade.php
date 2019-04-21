@@ -17,6 +17,7 @@
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
+
     <div id="app">
         @include('partials._header', [
             'title' => $title ?? null,
@@ -27,5 +28,6 @@
             @yield('content')
         </main>
     </div>
+
 </body>
 </html>

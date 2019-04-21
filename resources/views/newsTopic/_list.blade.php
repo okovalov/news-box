@@ -1,7 +1,7 @@
 <div class="container">
 
     @forelse($newsTopics as $newsTopic)
-        @include('newsTopics._item')
+        @include('newsTopic._item')
     @empty
 
     @component('components.empty-model')

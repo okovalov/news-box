@@ -8,8 +8,10 @@ use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use App\Listeners\SaveLatestExchange;
 use App\Listeners\SaveLatestNewsTopic;
+use App\Listeners\SaveLatestWeather;
 use App\Events\ExchangeHasBeenReceived;
 use App\Events\NewsTopicHasBeenReceived;
+use App\Events\WeatherHasBeenReceived;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -27,6 +29,9 @@ class EventServiceProvider extends ServiceProvider
         ],
         NewsTopicHasBeenReceived::class => [
             SaveLatestNewsTopic::class,
+        ],
+        WeatherHasBeenReceived::class => [
+            SaveLatestWeather::class,
         ],
     ];
 

@@ -8,9 +8,9 @@ use App\Services\NewsTopicService;
 class SaveLatestNewsTopic implements ShouldQueue
 {
     /**
-     * ExchangeService
+     * NewsTopicService
      *
-     * @var ExchangeService
+     * @var NewsTopicService
      */
     protected $service;
 

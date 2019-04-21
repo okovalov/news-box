@@ -4,4 +4,5 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('news', 'NewsTopicsController@index')->name('newsTopics.index');
+Route::get('news', 'NewsTopicController@index')->name('newsTopic.index');
+Route::get('weather', 'WeatherController@index')->name('weather.index');

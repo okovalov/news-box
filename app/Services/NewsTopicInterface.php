@@ -8,7 +8,7 @@ interface NewsTopicInterface
      *
      * @param array $payload
      *
-     * @return App\Models\NewsTopics
+     * @return App\Models\NewsTopic
      */
     public function preserveData($payload);
 

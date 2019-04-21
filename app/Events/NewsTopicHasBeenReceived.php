@@ -3,7 +3,6 @@
 namespace App\Events;
 
 use Illuminate\Queue\SerializesModels;
-use Presearch\Models\AccountTransaction;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
 

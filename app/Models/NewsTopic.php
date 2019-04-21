@@ -13,6 +13,7 @@ class NewsTopic extends Model
      */
     protected $fillable = [
         'title',
+        'subject',
         'author',
         'description',
         'url',

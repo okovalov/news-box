@@ -6,6 +6,7 @@ use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 use App\Console\Commands\CheckForExchange;
 use App\Console\Commands\CheckForNewsTopic;
+use App\Console\Commands\CheckForWeather;
 
 class Kernel extends ConsoleKernel
 {
@@ -17,6 +18,7 @@ class Kernel extends ConsoleKernel
     protected $commands = [
         CheckForExchange::class,
         CheckForNewsTopic::class,
+        CheckForWeather::class,
     ];
 
     /**
@@ -27,15 +29,34 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule
-            ->command('check:exchange usd cad')
-            ->cron(config('newsbox.exchange.cron.exchange_schedule'))
-            ->appendOutputTo('/tmp/laravel-cron');
+        $pairsList = config('newsbox.exchange.currency_pairs_list');
 
-        $schedule
-            ->command('check:news water')
-            ->cron(config('newsbox.newstopic.cron.newstopic_schedule'))
-            ->appendOutputTo('/tmp/laravel-cron');
+        foreach ($pairsList as $pair) {
+            $command = sprintf('check:exchange %s', $pair);
+
+            $schedule
+                ->command($command)
+                ->cron(config('newsbox.exchange.cron.exchange_schedule'))
+                ->appendOutputTo('/tmp/laravel-cron');
+        }
+
+        $subjectsList = config('newsbox.newstopic.subjects_list');
+
+        foreach ($subjectsList as $subject) {
+            $schedule
+                ->command(CheckForNewsTopic::class, [$subject])
+                ->cron(config('newsbox.newstopic.cron.newstopic_schedule'))
+                ->appendOutputTo('/tmp/laravel-cron');
+        }
+
+        $locationList = config('newsbox.weather.location_list');
+
+        foreach ($locationList as $location) {
+            $schedule
+                ->command(CheckForWeather::class, [$location])
+                ->cron(config('newsbox.newstopic.cron.newstopic_schedule'))
+                ->appendOutputTo('/tmp/laravel-cron');
+        }
     }
 
     /**

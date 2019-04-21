@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\NewsTopic;
 
-class NewsTopicsController extends Controller
+class NewsTopicController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +14,9 @@ class NewsTopicsController extends Controller
      */
     public function index()
     {
-        $active = NewsTopic::latest()->take(5)->get();
+        $active = NewsTopic::latest()
+            ->take(config('newsbox.newstopic.page_size'))->get();
 
-        return view('newsTopics.index', compact('active'));
+        return view('newsTopic.index', compact('active'));
     }
 }
