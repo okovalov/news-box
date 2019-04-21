@@ -5,6 +5,7 @@ use Exception;
 use App\Models\Exchange;
 use App\Events\ExchangeHasBeenReceived;
 use GuzzleHttp\Client as GuzzleClient;
+use Illuminate\Support\Facades\Cache;
 
 class ExchangeService implements ExchangeInterface
 {
@@ -80,5 +81,22 @@ class ExchangeService implements ExchangeInterface
 
             return $error;
         }
+    }
+
+    public function fetchData($from, $to)
+    {
+        $seconds = config('newsbox.exchange.cache_expiration_seconds.exchange_data');
+
+        $exchange = Cache::remember('exchangeFor_'.$from.'_'.$to, $seconds, function () use ($from, $to) {
+            $this->getData($from, $to);
+
+            \Log::info('Value cached ex');
+
+            return Exchange::where([['from_currency_code','=',$from], ['to_currency_code','=',$to]])->latest()->first();
+        });
+
+        \Log::info('Value fetched ex');
+
+        return $exchange;
     }
 }

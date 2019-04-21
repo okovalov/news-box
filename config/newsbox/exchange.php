@@ -8,6 +8,10 @@ return [
         'usd cad',
         'cad usd'
     ],
+    'cache_expiration_seconds' => [
+        'exchange_list' => 60,
+        'exchange_data' => 60
+    ],
     'response_map' => [
         'from_currency_code' => env('EXCHANGE_RESPONSE_FROM', '1. From_Currency Code'),
         'to_currency_code' => env('EXCHANGE_RESPONSE_TO', '3. To_Currency Code'),

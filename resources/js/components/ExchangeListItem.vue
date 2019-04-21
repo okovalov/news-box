@@ -1,7 +1,7 @@
 <template>
     <div>
         <b-field>
-            <weather-info-item v-if="isWeatherLoaded" :weather="weather" :location="location"></weather-info-item>
+            <exchange-info-item v-if="isExchangeLoaded" :exchange="exchange" :pair="pair"></exchange-info-item>
         </b-field>
         <b-notification ref="element" :closable="false">
             <button class="button is-primary is-medium" @click="fetchData">
@@ -13,15 +13,15 @@
 
 <script>
     export default {
-        props: ["location"],
+        props: ["pair"],
         mounted() {
             this.fetchData()
         },
         data() {
             return {
                 isFullPage: false,
-                isWeatherLoaded: true,
-                weather: {},
+                isExchangeLoaded: true,
+                exchange: {},
             }
         },
         methods: {
@@ -29,21 +29,25 @@
                 const loadingComponent = this.$loading.open({
                     container: this.isFullPage ? null : this.$refs.element.$el
                 })
-                this.isWeatherLoaded = false;
+                this.isExchangeLoaded = false;
 
                 setTimeout(() => loadingComponent.close(), 3 * 1000)
-                this.updateWeatherInfo()
+                this.updateExchangeInfo()
             },
-            updateWeatherInfo() {
-                const payload = {
-                    location: this.location
-                }
-                axios
-                    .post("/api/weather/", payload)
-                    .then(response => {
-                        this.isWeatherLoaded = true
+            updateExchangeInfo() {
+                const from = this.pair.split(' ').slice(0,1).join()
+                const to = this.pair.split(' ').slice(1).join()
 
-                        this.weather = {...this.weather, ...response.data.data};
+                const payload = {
+                    from,
+                    to
+                }
+
+                axios
+                    .post("/api/exchange/", payload)
+                    .then(response => {
+                        this.isExchangeLoaded = true
+                        this.exchange = {...this.exchange, ...response.data.data};
                     });
                 }
         }

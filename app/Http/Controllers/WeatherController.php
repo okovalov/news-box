@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use App\Models\Weather;
 use Illuminate\Support\Facades\Cache;
 use App\Services\WeatherService;
 

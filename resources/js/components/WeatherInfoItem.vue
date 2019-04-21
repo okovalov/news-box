@@ -8,10 +8,6 @@
 <script>
     export default {
         props: ["weather", "location"],
-        mounted() {
-            console.log('Weather mounted.', this.weather)
-
-        },
         data() {
             return {
                 data: [this.weather],
@@ -36,11 +32,6 @@
 
                 ]
             }
-        },
-        computed: {
-            weatherInfo() {
-                return this.weather
-            }
-        },
+        }
     }
 </script>
