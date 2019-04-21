@@ -20,4 +20,8 @@ class NewsTopic extends Model
         'content',
         'published_at',
     ];
+
+    protected $casts = [
+        'published_at' => 'date',
+    ];
 }
