@@ -1,12 +1,15 @@
 <div class="container">
 
-    @forelse($newsTopics as $newsTopic)
-        @include('newsTopic._item')
+    @forelse($newsTopics as $newsItem)
+        <news-topic-list
+            news="{{ $newsItem }}">
+        </news-topic-list>
     @empty
 
     @component('components.empty-model')
-        There are no news topics
+        There are no news
     @endcomponent
 
     @endforelse
+
 </div>
